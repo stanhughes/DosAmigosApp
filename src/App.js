@@ -23,14 +23,6 @@
  } from 'react-native';
  
  import {
-   Colors,
-   DebugInstructions,
-   Header,
-   LearnMoreLinks,
-   ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
-
- import {
     darkText,
     lightText,
     paleButton,
@@ -38,7 +30,8 @@
  } from './resources/ColorPalette'
 
  import BackgroundImage from '../assets/cesira-alvarado-dxIIYAiR2xw-unsplash.jpeg'
- const BACKGROUND_IMAGE = Image.resolveAssetSource(BackgroundImage).uri
+ const lightBackground = Image.resolveAssetSource(BackgroundImage).uri
+ const darkBackground = Image.resolveAssetSource(BackgroundImage).uri
  
  const Section = ({children, title, secondTitle}): Node => {
    const isDarkMode = useColorScheme() === 'dark';
@@ -49,11 +42,8 @@
          style={[
            styles.sectionTitle,
            {
-             color: isDarkMode ? Colors.white : Colors.black,
+             color: isDarkMode ? lightText : darkText,
            },
-           {
-               color: darkText,
-           }
          ]}>
          {title}
        </Text>
@@ -81,11 +71,7 @@
  const App: () => Node = () => {
    const isDarkMode = useColorScheme() === 'dark';
  
-   const backgroundStyle = {
-     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-   };
-
-   const image = { uri: BACKGROUND_IMAGE}
+   const image = { uri: isDarkMode ? darkBackground : lightBackground }
  
    return (
        <View style={{flex: 1}}>
