@@ -18,6 +18,8 @@
    View,
    ImageBackground,
    Image,
+   Pressable,
+   Alert,
  } from 'react-native';
  
  import {
@@ -28,12 +30,20 @@
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
 
+ import {
+    darkText,
+    lightText,
+    paleButton,
+    paleButtonPressed,
+ } from './resources/ColorPalette'
+
  import BackgroundImage from '../assets/cesira-alvarado-dxIIYAiR2xw-unsplash.jpeg'
  const BACKGROUND_IMAGE = Image.resolveAssetSource(BackgroundImage).uri
  
- const Section = ({children, title}): Node => {
+ const Section = ({children, title, secondTitle}): Node => {
    const isDarkMode = useColorScheme() === 'dark';
    return (
+    <SafeAreaView style={{flex: 1}}>
      <View style={styles.sectionContainer}>
        <Text
          style={[
@@ -41,19 +51,30 @@
            {
              color: isDarkMode ? Colors.white : Colors.black,
            },
+           {
+               color: darkText,
+           }
          ]}>
          {title}
+       </Text>
+       <Text style={[
+           styles.secondSectionTitle, 
+           { color: isDarkMode ? lightText : darkText},
+        ]}
+       >
+           {secondTitle}
        </Text>
        <Text
          style={[
            styles.sectionDescription,
            {
-             color: isDarkMode ? Colors.light : Colors.dark,
+             color: isDarkMode ? lightText : darkText,
            },
          ]}>
          {children}
        </Text>
      </View>
+     </SafeAreaView>
    );
  };
  
@@ -67,39 +88,45 @@
    const image = { uri: BACKGROUND_IMAGE}
  
    return (
-     <SafeAreaView style={backgroundStyle}>
-       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-       <ScrollView
-         contentInsetAdjustmentBehavior="automatic"
-         style={backgroundStyle}>
-         <View
-
-           style={{
-             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-           }}>
-           <ImageBackground 
-            source={image}
-            resizeMode='cover'
-            style={styles.image}
-           >
-                <Section title="Step One">
-                    Edit <Text style={styles.highlight}>App.js</Text> to change this
-                    screen and then come back to see your edits.
-                </Section>
-                <Section title="See Your Changes">
-                    <ReloadInstructions />
-                </Section>
-                <Section title="Debug">
-                    <DebugInstructions />
-                </Section>
-                <Section title="Learn More">
-                    Read the docs to discover what to do next:
-                </Section>
-                <LearnMoreLinks />
-           </ImageBackground>
+       <View style={{flex: 1}}>
+         <View style={{flex: 1}}>
+             <ImageBackground
+                source={image}
+                resizeMode='cover'
+                style={{flex: 1, justifyContent: 'center', opacity: 0.5}}
+             >
+             </ImageBackground>
          </View>
-       </ScrollView>
-     </SafeAreaView>
+         <View style={{position: 'absolute', top: 0, left: 0, height:'100%', width:'100%'}}>
+            <Section 
+                title='Welcome to'
+                secondTitle='Dos Amigos Software'
+            >
+                Specializing in mobile software (iOS/Android) development using <Text style={styles.highlight}>React Native</Text>
+            </Section>
+            <View style={{flex: 3, alignItems: 'center', justifyContent: 'flex-start'}}>
+                <Pressable
+                    onPress={() => Alert.alert('Pressed', 'I was pressed!')}
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed
+                                ? paleButtonPressed
+                                : paleButton
+                        },
+                        {
+                            borderRadius: 8,
+                            padding: 16
+                        }
+                    ]}
+                >
+                    <Text style={[
+                        styles.buttonText, 
+                        {color: isDarkMode ? lightText : darkText}
+                    ]}>Learn More</Text>
+                </Pressable>
+            </View>
+         </View>
+        </View>
    );
  };
  
@@ -108,9 +135,17 @@
      marginTop: 32,
      paddingHorizontal: 24,
    },
+   buttonText: {
+    fontSize: 20,
+    fontWeight: '500'
+   },
    sectionTitle: {
      fontSize: 24,
      fontWeight: '600',
+   },
+   secondSectionTitle: {
+       fontSize: 30,
+       fontWeight: '900'
    },
    sectionDescription: {
      marginTop: 8,
@@ -123,7 +158,7 @@
    image: {
      flex: 1,
      justifyContent: 'center',
-     opacity: 0.76
+     opacity: 0.2
    },
  });
  
