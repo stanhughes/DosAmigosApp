@@ -90,7 +90,7 @@
             >
                 Specializing in mobile software (iOS/Android) development using <Text style={styles.highlight}>React Native</Text>
             </Section>
-            <View style={{flex: 3, alignItems: 'center', justifyContent: 'flex-start'}}>
+            <View style={{ flex: 3, alignItems: 'center', justifyContent: 'flex-start', margin: 20 }}>
                 <Pressable
                     onPress={() => Alert.alert('Pressed', 'I was pressed!')}
                     style={({ pressed }) => [
@@ -111,6 +111,10 @@
                     ]}>Find Out More</Text>
                 </Pressable>
             </View>
+            <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end', margin: 20 }}>
+                <Text style={{ color: isDarkMode ? lightText : darkText }}>Photo by Cesira Alvarado</Text>
+            </View>
+
          </View>
         </View>
    );
