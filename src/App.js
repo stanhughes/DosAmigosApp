@@ -100,7 +100,7 @@
                                 : paleButton
                         },
                         {
-                            borderRadius: 8,
+                            borderRadius: 38,
                             padding: 16
                         }
                     ]}
