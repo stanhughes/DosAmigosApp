@@ -108,7 +108,7 @@
                     <Text style={[
                         styles.buttonText, 
                         {color: isDarkMode ? lightText : darkText}
-                    ]}>Learn More</Text>
+                    ]}>Find Out More</Text>
                 </Pressable>
             </View>
          </View>
