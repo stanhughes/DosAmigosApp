@@ -27,6 +27,8 @@
     lightText,
     paleButton,
     paleButtonPressed,
+    paleWhite,
+    veryPaleWhite,
  } from './resources/ColorPalette'
 
  import BackgroundImage from '../assets/cesira-alvarado-dxIIYAiR2xw-unsplash.jpeg'
@@ -72,6 +74,8 @@
    const isDarkMode = useColorScheme() === 'dark';
  
    const image = { uri: isDarkMode ? darkBackground : lightBackground }
+
+   const buttonString = 'Find Out More'.toUpperCase()
  
    return (
        <View style={{flex: 1}}>
@@ -107,12 +111,27 @@
                 >
                     <Text style={[
                         styles.buttonText, 
-                        {color: isDarkMode ? lightText : darkText}
-                    ]}>Find Out More</Text>
+                        {color: isDarkMode ? lightText : veryPaleWhite}
+                    ]}>{buttonString}</Text>
                 </Pressable>
             </View>
             <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end', margin: 20 }}>
-                <Text style={{ color: isDarkMode ? lightText : darkText }}>Photo by Cesira Alvarado</Text>
+                <Pressable
+                    onPress={() => Alert.alert('Place holder', "link to Alvarado's photo")}
+                    style={({pressed}) => [
+                        {
+                        backgroundColor: pressed
+                            ? paleButtonPressed
+                            : null
+                        }
+                    ]}
+                >
+                    <Text 
+                        style={[{ color: isDarkMode ? lightText : darkText }, styles.attribute]}
+                    >
+                        Photo by Cesira Alvarado
+                    </Text>
+                </Pressable>
             </View>
 
          </View>
@@ -127,7 +146,11 @@
    },
    buttonText: {
     fontSize: 20,
-    fontWeight: '500'
+    fontWeight: '900',
+    color: 'green',
+   },
+   attribute: {
+    opacity: 0.6
    },
    sectionTitle: {
      fontSize: 24,
